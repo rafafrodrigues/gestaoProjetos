@@ -1,11 +1,11 @@
 <?php
-	session_start();
+	//session_start();
     require '../ProjetosModel/projeto-controller.php';         
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Projetos</title>
+	<title>Projetos Pendentes</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
     
@@ -26,7 +26,7 @@
 <body>			
     
    <section> <!-- início section -->  	  
-	    <div class="container mt-1">  <!-- início container -->          
+	    <div class="container mt-1 mb-2">  <!-- início container -->          
 
 	    	<div class="row">
 		    	<div class="col-md-3 menu mb-2" class="collapse navbar-collapse" id="nav-menu-lateral">		<!-- início menu lateral -->	   
@@ -69,7 +69,7 @@
 			  			  		</thead>
 
 			  			  		<?php
-			  			  		$query_projetos_equipe = "select tb_projetos.nome, tb_projetos.tarefas, tb_projetos.colaborador, tb_projetos.auxiliando, tb_projetos.prazo, tb_projetos.equipe, st.status as st_status FROM tb_projetos inner join tb_status as st on st.id_status=tb_projetos.id_status 
+			  			  		$query_projetos_equipe = "select tb_projetos.nome, tb_projetos.tarefas, tb_projetos.colaborador, tb_projetos.auxiliando, tb_projetos.prazo, tb_projetos.equipe, st.status as st_status FROM tb_projetos inner join tb_status as st on st.id_status=tb_projetos.status_id 
 						            order by tb_projetos.id desc";
 			  			  		$result_proj = $conexao->prepare($query_projetos_equipe);
 			  			  		$result_proj->execute();

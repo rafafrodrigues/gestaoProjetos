@@ -1,5 +1,4 @@
-<?php
-	//session_start();	
+<?php		
    include_once('../ProjetosModel/session.php');
    require('../ProjetosModel/projeto-model.php'); 
     
