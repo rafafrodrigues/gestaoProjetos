@@ -11,7 +11,7 @@
   }
 
   // busca os dados do projeto a ser editado  
-  $sql = "SELECT nome, tarefas, colaborador, auxiliando, prazo, equipe, id_status FROM tb_projetos WHERE id = :id";
+  $sql = "SELECT nome, tarefas, colaborador, auxiliando, prazo, equipe, status_id FROM tb_projetos WHERE id = :id";
   $stmt = $conexao->prepare($sql);
   $stmt->bindValue(':id', $id, PDO::PARAM_INT);
   $stmt->execute();
@@ -19,6 +19,15 @@
   $user = $stmt->fetch(PDO::FETCH_ASSOC);
   // se o método fetch() não retornar um array, significa que o ID não corresponde a um projeto válido
   //var_dump($user);
+
+  /*if ($user['id_status'] == 1) {
+  	$st = 'Pendente';
+  } elseif($user['id_status'] == 2) {
+  	$st = 'Em andamento';
+  } else {
+  	$st = 'Realizado';
+  }*/
+  
 ?>
 <!DOCTYPE html>
 <html>
@@ -103,16 +112,20 @@
 			               	 <div class="form-group col-md-6">
 			               	 	<label>Status</label>
 			               	 	<select class="form-control" id="id_status" name="id_status" >
-				                      <option value="<?php echo get_status_por_id($conexao, $user['id_status']);?>"><?php echo get_status_por_id($conexao, $user['id_status']); ?></option> 
+				                      <option value="<?php echo get_status_por_id($conexao, $user['status_id']);?>"><?php echo get_status_por_id($conexao, $user['status_id']); ?></option> 
 				                      <?
-				                        $sqlC  = "SELECT status FROM tb_status WHERE ativo = :ativo ORDER BY id_status ASC"; ?>
-				                       <? $stmC = $conexao->prepare($sqlC); ?> 	                       
+				                        $sqlC  = "SELECT * FROM tb_status WHERE ativo = :ativo ORDER BY status ASC"; ?>
+				                       <? $stmC = $conexao->prepare($sqlC); ?>                      
 				                       <? $stmC->bindValue('ativo', 1); ?>
 				                       <? $stmC->execute(); ?>
 				                       <? $fetch = $stmC->fetchAll(PDO::FETCH_ASSOC); ?>
-				                       <?  foreach($fetch as $status){
-				                          
-				                           echo '<option value="'.$status['id_status'].'">'. utf8_encode($status['status']).'</option>';
+				                       <?  foreach($fetch as $status){	                       	   
+											if($status['id_status'] == $user['status_id']){
+										       $selected = 'selected';
+									        }else{
+										       $selected = '';
+									        }
+				                          echo '<option value="'.$status['id_status'].'" '.$selected.'>'. utf8_encode($status['status']).'</option>';
 				                        }
 				                      ?> 
 				                  </select>
@@ -122,7 +135,7 @@
 			            <div class="row">
 			               <!-- ID do registro a ser editado é armazenado em um campo oculto (hidden), para que seja resgatado no projeto-edita.php, via POST. -->
 	                       <input type="hidden" name="id" value="<?php echo $id ?>">	
-	                       <input type="hidden" name="id_status" value="<?php echo $user['id_status']?>">
+	                       <input type="hidden" name="status_id" value="<?php echo $user['status_id']?>">
 			               <button type="submit" name="alterar" id="alterar" class="btn btn-outline-primary mt-3 ml-3 mb-2 btn-md">Salvar</button>
 			            </div>                    	            
 			               

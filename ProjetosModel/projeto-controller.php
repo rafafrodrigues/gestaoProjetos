@@ -1,6 +1,6 @@
 <?php
    //contem as regras de negócio    
-  require_once('inc/header.php'); 
+  include_once('inc/header.php'); 
   require '../ProjetosModel/conexao.php';
     
   if (isset($_POST['cadastrar'])) {
@@ -11,11 +11,11 @@
     $auxiliando = $_POST['auxiliando'];
     $prazo = $_POST['prazo'];
     $equipe = $_POST['equipe'];
-    $id_status = $_POST['id_status'];
+    $status_id = $_POST['id_status'];
     $id = $_POST['id'];
         
     // Insere os dados no banco
-    $query = "insert into tb_projetos (nome, tarefas, colaborador, auxiliando, prazo, equipe, id_status) values (:nome, :tarefas, :colaborador, :auxiliando, :prazo, :equipe, :id_status)";
+    $query = "insert into tb_projetos (nome, tarefas, colaborador, auxiliando, prazo, equipe, status_id) values (:nome, :tarefas, :colaborador, :auxiliando, :prazo, :equipe, :status_id)";
     $stmt = $conexao->prepare($query);  
     $stmt->bindValue(':nome', $nome);
     $stmt->bindValue(':tarefas', $tarefas);
@@ -23,7 +23,7 @@
     $stmt->bindValue(':auxiliando', $auxiliando);
     $stmt->bindValue(':prazo', $prazo);
     $stmt->bindValue(':equipe', $equipe);
-    $stmt->bindValue(':id_status', $id_status);    
+    $stmt->bindValue(':status_id', $status_id);    
     $stmt->execute();    
         
     // Se os dados forem inseridos com sucesso               

@@ -55,7 +55,7 @@
                 if ($count > 0) {
                    $fetchAll = $stm->fetchAll(PDO::FETCH_ASSOC);
                    foreach ($fetchAll as $result) {
-                    $status_nome = get_status_por_id($conexao,$result['id_status']);
+                    $status_nome = get_status_por_id($conexao,$result['status_id']);
                    	 echo '
                    	    <tr class="btnDelete">
                    	      <td>'.$result['nome'].'</td>
