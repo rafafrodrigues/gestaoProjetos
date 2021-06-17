@@ -51,6 +51,11 @@
 						    } else {
 						    	echo "Boa noite, " .$_SESSION['nome']."!";
 						    }
+						    /*
+						        modo britânico de escrever dia da semana: https://www.superprof.com.br/blog/diferenca-entre-ingles-britanico-e-americano/
+						    */
+						    echo "<br>";
+						    echo "<small>" .getdate()['weekday'].", ", strftime('%d')." " ,getdate()['month']. " ", getdate()['year']. "</small>";
 						?>
 	    	        </div>
 	    	        <div class="collapse navbar-collapse" id="nav-menu-lateral">
