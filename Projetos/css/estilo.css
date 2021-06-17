@@ -15,12 +15,13 @@ body {
 }  
 
 .menu li a {
-	color: #212529;
+	color: blue;
 } 
 
 .menu li a:hover {
 	text-decoration: none;
-	color: blue;
+	color: white;
+	background-color: blue;
 } 
 
 /* estilo para link do header */
