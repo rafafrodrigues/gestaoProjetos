@@ -38,6 +38,10 @@ body {
 	text-decoration: none;
 }
 
+small {
+	font-size: 0.7em;
+}
+
 /* estilo login */
 #container2 {
 	width: 400px;

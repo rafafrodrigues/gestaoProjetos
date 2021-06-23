@@ -56,6 +56,8 @@
                    $fetchAll = $stm->fetchAll(PDO::FETCH_ASSOC);
                    foreach ($fetchAll as $result) {
                     $status_nome = get_status_por_id($conexao,$result['status_id']);
+                    $user_id = get_id_user($conexao,$result['users_id']);
+                    if ($_SESSION['id'] == $user_id)
                    	 echo '
                    	    <tr class="btnDelete">
                    	      <td>'.$result['nome'].'</td>
@@ -90,7 +92,8 @@
                                     </div>
                                  </div>
                               </div>                                          
-                   	 ';                      
+                   	 ';  
+
                     }
                 } else {
                    echo '

@@ -69,13 +69,17 @@
 			  			  		</thead>
 
 			  			  		<?php
-			  			  		$query_projetos_equipe = "select tb_projetos.nome, tb_projetos.tarefas, tb_projetos.colaborador, tb_projetos.auxiliando, tb_projetos.equipe, tb_projetos.criado, tb_projetos.modificado, st.status as st_status FROM tb_projetos inner join tb_status as st on st.id_status=tb_projetos.status_id 
+			  			  		$query_projetos_equipe = "select tb_projetos.nome, tb_projetos.tarefas, tb_projetos.colaborador, tb_projetos.auxiliando, tb_projetos.equipe, tb_projetos.criado, tb_projetos.modificado, tb_projetos.users_id,
+			  			  			st.status as st_status,
+			  			  			u.id as id_users 
+			  			  			FROM tb_projetos inner join tb_status as st on st.id_status=tb_projetos.status_id
+			  			  			inner join users as u on u.id=tb_projetos.users_id 
 						            order by tb_projetos.id desc";
 			  			  		$result_proj = $conexao->prepare($query_projetos_equipe);
 			  			  		$result_proj->execute();
 			  			  		while ($row_proj = $result_proj->fetch(PDO::FETCH_ASSOC)) {
 			  			  		extract($row_proj);
-			  			  			if ($st_status == 'Realizado') {
+			  			  			if ($st_status == 'Realizado' && $_SESSION['id'] == $id_users) {
 			  			  				echo "<tr>";
 			  			  				echo "<td>$nome</td>";
 			  			  				echo "<td>$tarefas</td>";

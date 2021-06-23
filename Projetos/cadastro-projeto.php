@@ -105,7 +105,7 @@
                 </div>                
 
                 <div class="row">
-                 <input type="hidden" name="id_users" value="<?= isset($_SESSION['id_users']) ?>" />
+                 <input type="hidden" name="users_id" id="users_id" value="<?= isset($_SESSION['id']) ?>" />
                  <button type="submit" name="cadastrar" id="cadastrar" class="btn btn-outline-primary mt-3 ml-3 mb-2 btn-md">Cadastrar</button>
                 </div> 
               </form> <!-- /fim form -->
